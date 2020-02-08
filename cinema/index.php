@@ -11,7 +11,6 @@ include "config.php";
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC:400,700|Sigmar+One&display=swap&subset=cyrillic,latin-ext,vietnamese" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One&display=swap" rel="stylesheet">
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
@@ -66,17 +65,9 @@ if(isset($_POST['btnreg'])){
   }
 }
    ?>
-   <?php
-   
-include "config.php";
-
-
-
-?>
 
 </head>
 <body>
-
 <div class="naslov"> 
 <IMG SRC="img/kinostar.png" ALT="some text" WIDTH=200 HEIGHT=110>
 <h3> <br>Dobro došli u KinoStar </h3> <br>
@@ -86,53 +77,7 @@ include "config.php";
 <div class="container" >
 <div class="login-box">
 <div class="row" >
-    <div class="col-md-6 login-left">
-        <form action="" method="POST">
-        <h2> Prijavi se </h2>
-        <?php 
-            // Display Error message
-            if(isset($_POST['btnprijava'])){
-
-               $uname = mysqli_real_escape_string($con,$_POST['emailp']);
-               $password = mysqli_real_escape_string($con,$_POST['lozinkap']);
-           
-               
-               if ($uname != "" && $password != ""){
-           
-                   $sql_query = "select count(*) as cntUser from korisnik where email='".$uname."' and lozinka='".$password."'";
-                   $result = mysqli_query($con,$sql_query);
-                   $row = mysqli_fetch_array($result);
-           
-                   $count = $row['cntUser'];
-           
-                   if($count > 0){
-                       $_SESSION['emailp'] = $uname;
-                       header('Location: stranica.php');
-                   }else{
-                      $upozorenje = "Nevažeći email ili lozinka";
-                      echo $upozorenje;
-                   }
-           
-               }
-           
-           }
-           
-            ?>
-            
-            
-             <div class="form-group">
-                <label> Email </label>
-                <input type="text" name="emailp" class="form-control" required>
-             </div>
-             <div class="form-group">
-                <label> Lozinka </label>
-                <input type="password" name="lozinkap" class="form-control" required>
-             </div>
-             <button type="submit" name="btnprijava" class="btn btn-primary"> Prijava </button>
-        </form>
-    
-    </div>
-    <div class="col-md-6 login-right" >
+<div class="col-md-4 login-right" >
          <form action="" method="POST">
          <h2> Registriraj se </h2>
          <?php 
@@ -146,7 +91,6 @@ include "config.php";
             <?php
             }
             ?>
-
             <?php 
             // Display Success message
             if(!empty($success_message)){
@@ -176,6 +120,96 @@ include "config.php";
              </div>
              <button type="submit" name="btnreg" class="btn btn-primary"> Registracija </button>
         </form>
+    </div>
+    <div class="col-md-4 login-left">
+        <form action="" method="POST">
+        <h2> Prijavi se </h2>
+        <?php
+   
+include "config.php";
+
+if(isset($_POST['btnprijava'])){
+
+    $uname = mysqli_real_escape_string($con,$_POST['emailp']);
+    $password = mysqli_real_escape_string($con,$_POST['lozinkap']);
+
+    
+    if ($uname != "" && $password != ""){
+
+        $sql_query = "select count(*) as cntUser from korisnik where email='".$uname."' and lozinka='".$password."'";
+        $result = mysqli_query($con,$sql_query);
+        $row = mysqli_fetch_array($result);
+
+        $count = $row['cntUser'];
+
+        if($count > 0){
+            $_SESSION['emailp'] = $uname;
+            header('Location: stranica.php');
+        }else{
+           $upozorenje = "Nevažeći email ili lozinka";
+           echo $upozorenje;
+        }
+
+    }
+
+}
+?>
+             <div class="form-group">
+                <label> Email </label>
+                <input type="text" name="emailp" class="form-control" required>
+             </div>
+             <div class="form-group">
+                <label> Lozinka </label>
+                <input type="password" name="lozinkap" class="form-control" required>
+             </div>
+             <button type="submit" name="btnprijava" class="btn btn-primary"> Prijava </button>
+        </form>
+    
+    </div>
+    <div class="col-md-4 login-left">
+        <form action="" method="POST">
+        <h2> Admin prijava </h2>
+        <?php
+   
+   include "config.php";
+   
+   if(isset($_POST['admprijava'])){
+   
+       $uname = mysqli_real_escape_string($con,$_POST['emailp']);
+       $password = mysqli_real_escape_string($con,$_POST['lozinkap']);
+   
+       
+       if ($uname != "" && $password != ""){
+   
+           $sql_query = "select count(*) as cntUser from admin where email='".$uname."' and lozinka='".$password."'";
+           $result = mysqli_query($con,$sql_query);
+           $row = mysqli_fetch_array($result);
+   
+           $count = $row['cntUser'];
+   
+           if($count > 0){
+               $_SESSION['emailp'] = $uname;
+               header('Location: admin/admin.php');
+           }else{
+              $upozorenje = "Nemate dopuštenje da se prijavite kao admin!";
+              echo $upozorenje;
+           }
+   
+       }
+   
+   }
+   ?>
+             <div class="form-group">
+                <label> Email </label>
+                <input type="text" name="emailp" class="form-control" required>
+             </div>
+             <div class="form-group">
+                <label> Lozinka </label>
+                <input type="password" name="lozinkap" class="form-control" required>
+             </div>
+             <button type="submit" name="admprijava" class="btn btn-primary"> Prijavi se </button>
+        </form>
+    
     </div>
 </div>
 </body>
