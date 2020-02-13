@@ -262,12 +262,7 @@ Međunarodna kinematografska udruga (UNIC) proglasila je Blitz-CineStar najbolji
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.1.0/smooth-scroll.min.js" integrity="sha256-
     MMt0/21G3z0Zg4ET1kI3HC9npItDowkitRDVr0FhCxA" crossorigin="anonymous"></script>
-    <script type="text/javascipt">
-        $(function () {
-            var scroll = new SmoothScroll('a[href*="#section-"]');
-        };
-    </script>
-
+   
 
 
     <script src="scripts/jquery-3.3.1.min.js "></script>
