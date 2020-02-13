@@ -85,10 +85,10 @@
                                 }
                                 mysqli_free_result($result);
                             } else{
-                                echo '<h4 class="no-annot">No Bookings right now</h4>';
+                                echo '<h4 class="no-annot">Nema rezervacija trenutno</h4>';
                             }
                         } else{
-                            echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                            echo "GREŠKA! " . mysqli_error($link);
                         }
                         ?>
                     </div>
